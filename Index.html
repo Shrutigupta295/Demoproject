@@ -1,16 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+   <style>
+   h1{
+   text-align:center;
+   color:white;
+   }
+   table {
+   width: 600px;
+   height:600px;
+   margin:0px auto;
+   }
+   table tr{
+   width:600px;
+   height:200px;
+   }
+   table tr td
+   {
+   width:200px;
+   height:200px;
+   }
+	table ,tr ,td{
+	border:5px solid black;
+	border-collapse:collapse;
+	text-align:center;
+	}
+	table tr td img{
+	width:180px;
+	height: 180px;
+	}
+	#btn1{
+	display: none;
+	}
+	
+	</style>
+	<script>
+	var gamestatus = 1;
+	 var turn =0;
+	 var state=[2,2,2,2,2,2,2,2,2];
+	 var winposition=[
+	 [0,1,2],
+	 [3,4,5],
+	 [6,7,8],
+	 [0,3,6],
+	 [1,4,7],
+	 [2,5,8],
+	 [0,4,8],
+	 [2,4,6]
+	 ];
+	 function  tap(e,i)
+	 {
+	 if(state[i]==2 && gamestatus==1)
+	 {
+	 if(turn==0)
+	 {
+	  e.innerHTML= "<img src='xa.jpg'>";
+	  s1.play();
+	  turn=1;
+	  state[i]=0;
+	 }
+	 else if(turn==1){
+	 e.innerHTML= "<img src='oa.jpg'>";
+	 s2.play();
+	 turn=0;
+	 state[i]=1;
+	 }
+	 }
+	 
+	 var winner=checkwinner();
+	 if(winner==0)
+	 {
+	 h1.innerHTML= "O Player won";
+	 btn1.style.display="Block";
+	 gamestatus=0;
+	 body.style.backgroundImage="url('cre.gif')";
+	 //sound.play();
+	 const msg= new SpeechSynthesisUtterance("O player Won");
+	 window.speechSynthesis.speak(msg);
+	 }
+	 else if(winner==1)
+	 {
+	  h1.innerHTML= "X Player Won";
+	   btn1.style.display="Block";
+	   gamestatus=0;
+	   body.style.backgroundImage="url('cre.gif')";
+	  // sound.play();
+	  const msg= new SpeechSynthesisUtterance("X player Won");
+	 window.speechSynthesis.speak(msg);
+	 }
+	 // check draw
+	 if(!state.includes(2) && winner==2)
+	 {
+	 h1.innerHTML ="Game Draw";
+	 btn1.style.display="Block";
+	 const msg= new SpeechSynthesisUtterance("X player Won");
+	 window.speechSynthesis.speak(msg);
+	 }
+	 }
+	 
+	 function checkwinner()
+	 {
+	  var winner=2;
+	  for(x of winposition )
+	  {
+	  if(state[x[0]] == state[x[1]] && state[x[1]] == state[x[2]] && state[x[0]] !=2 )
+	  {
+	   winner= state[x[0]];
+	   break;
+	  }
+	 }
+	 return winner;
+	 }
+	 
+	 function restartgame()
+	 {
+	 window.location.reload();
+	 }
+	 </script>
 </head>
-<body>
-    <h1>Hello Digicoder</h1>
-    <h2>Welcome to digicoder</h2>
-    <p>
-        Software engineering is the branch of computer science that deals with the design, development, testing, and maintenance of software applications. 
-    </p>
+<body id="body">
+ <h1 id="h1"></h1>
+ <audio id="sound" src="tik1.dat"></audio>
+  <audio id="s1" src="tik2.dat"></audio>
+   <audio id="s2" src="tik2.dat"></audio>
+   
+	<center> <button onclick="restartgame()" id="btn1">Restart Game</button></center>
+	 <br/><br/>
+	 
+     <table>
+	 <tr>
+	 <td onclick="tap(this,0)"></td>
+	 <td onclick="tap(this,1)" ></td>
+	 <td onclick="tap(this,2)"></td>
+	 </tr>
+	 <tr>
+	 <td onclick="tap(this,3)"></td>
+	 <td onclick="tap(this,4)"></td>
+	 <td onclick="tap(this,5)"></td>
+	 </tr>
+	 <tr>
+	 <td onclick="tap(this,6)"></td>
+	  <td onclick="tap(this,7)"></td>
+	   <td onclick="tap(this,8)"></td>
+	   </tr>
+	 </table>
 
 </body>
 </html>
