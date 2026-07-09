@@ -29,7 +29,7 @@
 	height: 180px;
 	}
 	#btn1{
-	display: none;
+	distplay: none;
 	}
 	
 	</style>
@@ -53,13 +53,13 @@
 	 {
 	 if(turn==0)
 	 {
-	  e.innerHTML= "<img src='xa.jpg'>";
+	  e.innerHTML= "<img src='xa.jpg'/>";
 	  s1.play();
 	  turn=1;
 	  state[i]=0;
 	 }
 	 else if(turn==1){
-	 e.innerHTML= "<img src='oa.jpg'>";
+	 e.innerHTML= "<img src='oa.jpg'/>";
 	 s2.play();
 	 turn=0;
 	 state[i]=1;
@@ -68,33 +68,35 @@
 	 
 	 var winner=checkwinner();
 	 if(winner==0)
-	 {
-	 h1.innerHTML= "O Player won";
-	 btn1.style.display="Block";
-	 gamestatus=0;
-	 body.style.backgroundImage="url('cre.gif')";
-	 //sound.play();
-	 const msg= new SpeechSynthesisUtterance("O player Won");
-	 window.speechSynthesis.speak(msg);
-	 }
-	 else if(winner==1)
-	 {
-	  h1.innerHTML= "X Player Won";
-	   btn1.style.display="Block";
-	   gamestatus=0;
-	   body.style.backgroundImage="url('cre.gif')";
-	  // sound.play();
-	  const msg= new SpeechSynthesisUtterance("X player Won");
-	 window.speechSynthesis.speak(msg);
-	 }
-	 // check draw
+{
+ h1.innerHTML= "X Player Won";
+ btn1.style.display="Block";
+ gamestatus=0;
+ body.style.backgroundImage="url('cre.gif')";
+ sound.play();
+
+ const msg= new SpeechSynthesisUtterance("X player Won");
+ window.speechSynthesis.speak(msg);
+}
+
+else if(winner==1)
+{
+ h1.innerHTML= "O Player Won";
+ btn1.style.display="Block";
+ gamestatus=0;
+ body.style.backgroundImage="url('cre.gif')";
+ sound.play();
+
+ const msg= new SpeechSynthesisUtterance("O player Won");
+ window.speechSynthesis.speak(msg);
+}
+	 //check draw
 	 if(!state.includes(2) && winner==2)
 	 {
 	 h1.innerHTML ="Game Draw";
 	 btn1.style.display="Block";
-	 const msg= new SpeechSynthesisUtterance("X player Won");
-	 window.speechSynthesis.speak(msg);
 	 }
+	 
 	 }
 	 
 	 function checkwinner()
@@ -119,7 +121,7 @@
 </head>
 <body id="body">
  <h1 id="h1"></h1>
- <audio id="sound" src="tik1.dat"></audio>
+   <audio id="sound" src="sound1.acc"></audio>
   <audio id="s1" src="tik2.dat"></audio>
    <audio id="s2" src="tik2.dat"></audio>
    
